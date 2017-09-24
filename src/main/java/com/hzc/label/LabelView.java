@@ -2,6 +2,7 @@ package com.hzc.label;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
 import android.support.annotation.Nullable;
@@ -155,15 +156,22 @@ public class LabelView extends LinearLayout {
                 View v = views.get(j);
                 TextView textView = (TextView) v.findViewById(R.id.txt_jc_text);
                 textView.setOnClickListener(new OnClickListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.M)
                     @Override
                     public void onClick(View v) {
                         for (TextView tv : tvlist) {
                             tv.setSelected(false);
-                            tv.setTextAppearance(R.style.tagItemNormal);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                tv.setTextAppearance(R.style.tagItemNormal);
+                            }else{
+                                tv.setTextColor(Color.parseColor("#c0c0c0"));
+                            }
                         }
                         v.setSelected(true);
-                        ((TextView) v).setTextAppearance(R.style.tagItemSelected);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            ((TextView) v).setTextAppearance(R.style.tagItemSelected);
+                        }else{
+                            ((TextView) v).setTextColor(Color.parseColor("#fd9526"));
+                        }
                         adapter.onClick(((View) v.getParent()).getTag());
                     }
                 });
