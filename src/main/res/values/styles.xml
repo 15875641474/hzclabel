@@ -1,0 +1,12 @@
+<resources>
+    <style name="tagItemNormal" parent="@android:style/Widget.TextView">
+        <item name="android:background">@drawable/selector_border_radius_gray</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#c0c0c0</item>
+    </style>
+    <style name="tagItemSelected" parent="@android:style/Widget.TextView">
+        <item name="android:background">@drawable/selector_border_radius_gray</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#fd9526</item>
+    </style>
+</resources>
