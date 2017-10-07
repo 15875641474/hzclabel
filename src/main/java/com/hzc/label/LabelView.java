@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +25,7 @@ import java.util.Map;
  */
 
 public class LabelView extends LinearLayout {
+
 
     //数据适配器
     private TagAdapter adapter;
@@ -79,11 +79,12 @@ public class LabelView extends LinearLayout {
         this.postInvalidate();
     }
 
-
     /**
      * 绘制
      */
     private void drawList() {
+        if (this.adapter == null || this.adapter.list == null || this.adapter.list.size() == 0)
+            return;
         if (!redraw)
             return;
         int total = 0;
@@ -162,14 +163,14 @@ public class LabelView extends LinearLayout {
                             tv.setSelected(false);
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                 tv.setTextAppearance(R.style.tagItemNormal);
-                            }else{
+                            } else {
                                 tv.setTextColor(Color.parseColor("#c0c0c0"));
                             }
                         }
                         v.setSelected(true);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             ((TextView) v).setTextAppearance(R.style.tagItemSelected);
-                        }else{
+                        } else {
                             ((TextView) v).setTextColor(Color.parseColor("#fd9526"));
                         }
                         adapter.onClick(((View) v.getParent()).getTag());
@@ -198,7 +199,6 @@ public class LabelView extends LinearLayout {
         }
 
         addView(base);
-
         redraw = false;
     }
 
@@ -208,16 +208,6 @@ public class LabelView extends LinearLayout {
         this.redraw = true;
     }
 
-    @Override
-    public void addView(View child) {
-        super.addView(child);
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasWindowFocus) {
-        info("info=onWindowFocusChanged");
-        super.onWindowFocusChanged(hasWindowFocus);
-    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -251,11 +241,6 @@ public class LabelView extends LinearLayout {
             return enableDelete;
         }
 
-    }
-
-    public LabelView(Context context) {
-        this(context, null);
-        setOrientation(LinearLayout.VERTICAL);
     }
 
     public LabelView(Context context, @Nullable AttributeSet attrs) {
