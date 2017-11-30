@@ -8,7 +8,7 @@ android Automatic expansion label
 
 #How to Use ?
 
-不装逼了，就用中文吧
+不装逼了，就用中文吧  ~~~
 
 用法很简单 
 使用`com.hzc.label.LabelView`控件加入layout.xml中到你需要摆放的区域
